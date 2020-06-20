@@ -66,7 +66,7 @@ with open(budget_data_path, 'r') as csvfile:
             month_change_profits = f_profits - in_profits
             month_changes.append(month_change_profits)
 
-            tot_change_profits += month_change_profits
+            tot_change_profits = tot_change_profits + month_change_profits
             in_profits = f_profits
 
             av_change_profits = (tot_change_profits/total_months)
@@ -77,11 +77,6 @@ with open(budget_data_path, 'r') as csvfile:
             dec_date = date[month_changes.index(gr_dec_profit)]
 
 
-
-
-
-
-
 print("Financial Analysis")
 print("----------------------------")
 print("Total Months:" + str(total_months))
@@ -90,11 +85,13 @@ print("Average Change:" + "$" + str(int(av_change_profits)))
 print("Greatest Increase in Profits:" + str(in_date) + "($" + str(gr_inc_profit) + ")")
 print("Greatest Decrease in Profits:" + str(dec_date) + "($" + str(gr_dec_profit) + ")")
 
-with open('pybank_analysis.txt', 'w') as text:
+pybank_output = os.path.join("pybank_analysis.txt")
+
+with open(pybank_output, 'w') as text:
     text.write("Financial Analysis")
-    text.write("----------------------------")
-    text.write("Total Months:" + str(total_months))
-    text.write("Total:" + "$" + str(total_profit))
-    text.write("Average Change:" + "$" + str(int(av_change_profits)))
-    text.write("Greatest Increase in Profits:" + str(in_date) + "($" + str(gr_inc_profit) + ")")
-    text.write("Greatest Decrease in Profits:" + str(dec_date) + "($" + str(gr_dec_profit) + ")")
+    text.write("\n----------------------------")
+    text.write("\nTotal Months:" + str(total_months))
+    text.write("\nTotal:" + "$" + str(total_profit))
+    text.write("\nAverage Change:" + "$" + str(int(av_change_profits)))
+    text.write("\nGreatest Increase in Profits:" + str(in_date) + "($" + str(gr_inc_profit) + ")")
+    text.write("\nGreatest Decrease in Profits:" + str(dec_date) + "($" + str(gr_dec_profit) + ")")
